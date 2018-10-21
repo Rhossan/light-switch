@@ -1,0 +1,9 @@
+.button-style-true{
+    cursor: pointer;
+    background-color:rgb(128, 140, 247);
+}
+
+.button-style-false{
+    cursor: pointer;
+    background-color:red;
+}
