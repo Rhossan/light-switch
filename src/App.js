@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import SwitchController from './SwitchController';
+import LogicButton from './LogicButton';
 
 class App extends Component {
   constructor(props){
@@ -85,7 +86,8 @@ class App extends Component {
     return (
       <div className="App">
         {controllers}
-        {output}
+        {`${output}`}
+        <LogicButton button= {output}/>
       </div>
     );
   }

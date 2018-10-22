@@ -2,7 +2,7 @@ import React from 'react';
 import LogicButton from './LogicButton'
 import LogicGate from './LogicGate'
 
-class SwitchController extends React.Component{
+class SwitchController extends React.PureComponent{
 
     constructor(props){
         super(props)

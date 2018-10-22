@@ -1,6 +1,6 @@
 import React from 'react';
 
-class LogicGate extends React.Component{
+class LogicGate extends React.PureComponent{
     render(){
         return(
             <div>
