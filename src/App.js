@@ -17,7 +17,7 @@ class App extends Component {
         {id: 1, button_one: false, button_two: false, logic: 'and'},
         {id: 2, button_one: false, button_two: false, logic: 'and'},
       ],
-      gates: ['and', 'or'],
+      gates: ['and', 'and'],
       finalOutput: false,
       count: 3
     };
@@ -37,20 +37,26 @@ class App extends Component {
   }
 
   handler(id, value, logicVal){
+    // check if logic button (between the controller buttons) is changed
     if(value === 'logic'){ 
+      // TO MAINTAIN IMMUTABLE STATE 
       let new_switches = this.state.switches.slice(0); 
       new_switches[id][value] = logicVal;
+
       this.setState({ switches: new_switches })
     }else{
+      // update button click in controller
+      // TO MAINTAIN IMMUTABLE STATE 
       let new_switches = this.state.switches.slice(0);
       new_switches[id][value] === true ? new_switches[id][value] = false : new_switches[id][value] = true
-      // TO MAINTAIN IMMUTABLE STATE 
+      
       this.setState({ switches: new_switches })
     }
     
   }
 
   handleCompositeGate(id, event){
+    //update composite gate logic
     let newGates = this.state.gates.slice(0);
     newGates[id] = event.target.value;
     this.setState({gates: newGates});
@@ -71,12 +77,14 @@ class App extends Component {
   }
 
   determineOutput(){ 
+    //1) determine switch logic for first controller, this boolean is inital result
+    //2) then, starting at index 1, iterate through each controller with composite gate, and determine result boolean 
+    //3) return final result
     const { switches, gates } = this.state;
     let result = this.handleSwitchLogic(switches[0]); 
     if (switches.length === 1) return result;
 
     let i = 1;
-    debugger;
     for (let index = 0; index < gates.length; index++) {
       switch (gates[index]) {
         case 'and':
@@ -97,12 +105,12 @@ class App extends Component {
   }
 
   addController(){
-    //ADD GATE 
+    //ADD Controller
     let newState = this.state.switches.slice(0);
     newState.push({ id: this.state.count, button_one: false, button_two: false, logic: 'and', controllerOutput: false });
     this.setState({switches: newState});
     
-    //DELETE GATE 
+    //ADD Gate
     let newGates = this.state.gates.slice(0);
     newGates.push('and');
     this.setState({ gates: newGates });
@@ -111,7 +119,7 @@ class App extends Component {
 
   deleteController(){
     if(this.state.count > 2){
-      //ADD GATE 
+      //DELETE Controller
       let newState = this.state.switches.slice(0, this.state.switches.length - 1);
       this.setState({ switches: newState });
 
@@ -123,13 +131,12 @@ class App extends Component {
   }
 
   render() {
-    debugger
     const { switches, gates } = this.state;
     let output = this.determineOutput();
     const controllers = switches.map(s => {
       return (
         <div className="controller-parent">
-          <SwitchController key={s.id} handler={this.handler} button_one={switches[s.id].button_one} logic={switches[s.id].logic} button_two={switches[s.id].button_two} id={s.id} />
+          <SwitchController key={s.id} id={s.id} handler={this.handler} button_one={switches[s.id].button_one} logic={switches[s.id].logic} button_two={switches[s.id].button_two} />
         </div>
       )
     }) 
