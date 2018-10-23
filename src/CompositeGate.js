@@ -1,7 +1,14 @@
 import React from 'react';
 
-class LogicGate extends React.PureComponent{
- 
+class CompositeGate extends React.PureComponent{
+    constructor(props){
+        super(props);
+        this.update = this.update.bind(this);
+    }
+    
+    update(event){
+        this.props.onChange(this.props.id, event);
+    }
     render(){
         const options = ['and','or','xor'];
         return(
@@ -10,7 +17,7 @@ class LogicGate extends React.PureComponent{
                     <select
                         id="logic"
                         value={this.props.logic}
-                        onChange={this.props.onChange}
+                        onChange={this.update}
                     >
                         {options.map(option => (
                             <option key={option} value={option}>
@@ -24,4 +31,4 @@ class LogicGate extends React.PureComponent{
     }
 }
 
-export default LogicGate;
+export default CompositeGate;

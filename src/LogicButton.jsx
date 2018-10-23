@@ -1,17 +1,16 @@
 import React from 'react';
+import { Button } from 'semantic-ui-react'
 
 class LogicButton extends React.PureComponent{
     render(){
-        // const {buttonVal} = this.props;
         let button;
             if (this.props.button === true) {
-                button = <button className='button-style-true' onClick={this.props.onClick}>On</button>
+                button = <Button positive onClick={this.props.onClick}>On</Button>
             }else {
-                button = <button className='button-style-false' onClick={this.props.onClick}>Off</button>
-            }
-                    
+                button = <Button negative onClick={this.props.onClick}>Off</Button>
+            }    
         return(
-            <div>
+            <div className="logic-button-style">
                 {button}
             </div>
         )
@@ -19,3 +18,4 @@ class LogicButton extends React.PureComponent{
 }
 
 export default LogicButton;
+            

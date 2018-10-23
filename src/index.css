@@ -12,3 +12,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.switch-controller-block{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.logic-button-style{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.output-style{
+  display: flex; 
+  justify-content: center;
+}
+
+.options-style{
+  display: flex; 
+  justify-content: left;
+}
+
+/* .controller-parent{
+  display: flex;
+  flex-direction: row;
+} */

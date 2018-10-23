@@ -5,36 +5,30 @@ import LogicGate from './LogicGate'
 class SwitchController extends React.PureComponent{
 
     constructor(props){
-        super(props)
-        // const { button_one, button_two, logic } = this.props;
-        // this.state= { button_one, button_two, logic}
+        super(props);
         this.handleButtonOne = this.handleButtonOne.bind(this);
         this.handleButtonTwo = this.handleButtonTwo.bind(this);
         this.handleLogic = this.handleLogic.bind(this);
     }
+
     handleButtonOne(){
         this.props.handler(this.props.id, 'button_one');
     }
     handleButtonTwo() {
         this.props.handler(this.props.id, 'button_two');
     }
-    handleLogic() {
-        this.props.handler(this.props.id, 'logic');
+    handleLogic(event) {
+        this.props.handler(this.props.id, 'logic', event.target.value);
     }
     render(){
-        // const {button_one, button_two, logic} = this.props;
         return(
-            <div>
+            <div className="switch-controller-block">
                 <LogicButton button={this.props.button_one} onClick={this.handleButtonOne}></LogicButton>
-                <LogicGate onClick={this.handleLogic}></LogicGate>
+                <LogicGate logic={this.props.logic} onChange={this.handleLogic}></LogicGate>
                 <LogicButton button={this.props.button_two} onClick={this.handleButtonTwo}></LogicButton>
             </div>
         );
     }
-// switches {
-//     {id: 1, val:true},
-//     {id: 2, val:false}
-// }
 
 }
 
